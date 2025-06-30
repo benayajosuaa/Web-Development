@@ -1,5 +1,4 @@
 # Syntax SQL 📝
-halobenayaa@gmail.com
 > berikut ini adalah kumpulan syntax SQL yang dibuat dalam postgreSQL
 > 
 
@@ -94,3 +93,4 @@ SELECT kota, COUNT(*) FROM pelanggan GROUP BY kota HAVING COUNT(*) > 3;
 SELECT * FROM produk LIMIT 10;
 
 ```
+by : halobenayaa@gmail.com
