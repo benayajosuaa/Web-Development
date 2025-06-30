@@ -30,7 +30,7 @@ RDBMS sendiri tadi sempat disinggung dimana menggunakan bahasa SQL, dimana bahas
 - **Update**: mengubah data
 - **Delete**: menghapus data
 
-## Data Type SQL 🚪
+## General Data Type SQL 🚪
 
 Setiap kolom dalam tabel memiliki **jenis data (data type)**, untuk memberi tahu jenis nilai apa yang bisa disimpan.
 
