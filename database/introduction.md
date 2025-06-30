@@ -1,5 +1,4 @@
 # Database 📦
-halobenayaa@gmail.com
 
 Database → digunakan untuk menyimpan semua data agar bisa diolah kemudian nantinya 
 
@@ -75,3 +74,5 @@ a. **Karakter/Text**
 | `ARRAY` | Menyimpan array (misal: INTEGER[]) |
 | `UUID` | ID unik global |
 | `BYTEA` | Data biner (gambar/file) |
+
+by : halobenayaa@gmail.com
