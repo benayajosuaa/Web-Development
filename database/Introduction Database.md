@@ -9,8 +9,9 @@ Database sendiri memiliki banyak jenis :
 - **Relational (RDBMS)**: Data tersimpan dalam tabel yang saling berhubungan
 - **NoSQL**: Cocok untuk data tidak berstruktur (misalnya JSON)
 - **Object-oriented**: Data disimpan sebagai objek
-  
 
+<br />
+  
 ## RDBMS - Relational Database Management Systems
 
 > RDMS adalah salah satu jenis database yang menggunakan konsep SQL (structured Query Language) dalam penerapan database yang dianut 
@@ -23,13 +24,15 @@ Tabel terdiri dari:
 - **Baris (row/record/tuple)**: satu data lengkap (misal: data satu orang)
 
 RDBMS sendiri tadi sempat disinggung dimana menggunakan bahasa SQL, dimana bahasa tersebut merupakan bahasa standard untuk mengakses dan menanipulasi database, 
-
+<br />
 **🔑 Fungsi utama SQL :**
 
 - **Create**: membuat database atau tabel baru
 - **Read**: mengambil data
 - **Update**: mengubah data
 - **Delete**: menghapus data
+
+<br />
 
 ## General Data Type SQL 🚪
 
