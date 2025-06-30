@@ -1,5 +1,5 @@
 # Syntax SQL 📝
-
+halobenayaa@gmail.com
 > berikut ini adalah kumpulan syntax SQL yang dibuat dalam postgreSQL
 > 
 
