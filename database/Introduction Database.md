@@ -9,6 +9,7 @@ Database sendiri memiliki banyak jenis :
 - **Relational (RDBMS)**: Data tersimpan dalam tabel yang saling berhubungan
 - **NoSQL**: Cocok untuk data tidak berstruktur (misalnya JSON)
 - **Object-oriented**: Data disimpan sebagai objek
+  
 
 ## RDBMS - Relational Database Management Systems
 
