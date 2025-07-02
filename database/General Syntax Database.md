@@ -1,6 +1,7 @@
+### 2
 # Syntax SQL 📝
 > berikut ini adalah kumpulan syntax SQL yang dibuat dalam postgreSQL
-> 
+
 
 ### a. **CREATE**
 
