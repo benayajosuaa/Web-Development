@@ -46,7 +46,7 @@ dalam javascript terdapat 2 jenis built in method yang biasa digunakan :
 | `splice(i, n)` | Hapus/tambah elemen dari posisi tertentu | `arr.splice(2, 1)` |
 | `reverse()` | Membalik array | `arr.reverse()` |
 | `sort()` | Mengurutkan elemen | `arr.sort()` |
-1. non mutating → **tidak mengubah** array
+2. non mutating → **tidak mengubah** array
 
 | Method | Keterangan | Contoh |
 | --- | --- | --- |
@@ -78,9 +78,9 @@ berikut ini beberapa implementasi array dalam dunia software development :
 ]
 ```
 
-1. **Queue processing**: Dalam job processing seperti Redis Queue, RabbitMQ, antrean task bisa berupa array.
-2. **Authorization list**: Array untuk menyimpan list role/permission.
-3. **File uploads**: File yang diupload multipart bisa dikumpulkan dalam array untuk diproses batch.
+5. **Queue processing**: Dalam job processing seperti Redis Queue, RabbitMQ, antrean task bisa berupa array.
+6. **Authorization list**: Array untuk menyimpan list role/permission.
+7. **File uploads**: File yang diupload multipart bisa dikumpulkan dalam array untuk diproses batch.
 
 <br/>
 
