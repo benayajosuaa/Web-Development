@@ -24,11 +24,17 @@ dalam repository ini, akan dibagi materi-materi yang akan membahas mengenai web 
     3. [**Event / e**](https://github.com/benayajosuaa/Web-Dev/blob/main/Konsep/Event%20-%20(e).md)
     4. [**Parent and Child**](https://github.com/benayajosuaa/Web-Dev/blob/main/Konsep/Parend%20and%20Child.md)
 2. **💻 Frontend**
-    1. 
-    2. 
+    
+    ***— React :***
+    
+    1. [**Set Up Frontend React & Next.js**](https://github.com/benayajosuaa/Web-Dev/blob/main/Frontend/React/Set-up%20React.md)
+    
+    ***— Tailwind :*** 
+    
+    1. [**Flex & Grid**](https://github.com/benayajosuaa/Web-Dev/blob/main/Frontend/Tailwind%20CSS/Flex%20and%20Grid.md)
+    2. [**Image**](https://github.com/benayajosuaa/Web-Dev/blob/main/Frontend/Tailwind%20CSS/Image.md)
 3. **🧠 Backend**
-    1. 
-    2. 
+    1. [**Set Up Rest API using Typescript**](https://github.com/benayajosuaa/Web-Dev/blob/main/Backend/Set%20Up%20Rest%20API.md)
 4. **📦 Database**
     1. [**Introduction Database**](https://github.com/benayajosuaa/Web-Dev/blob/main/Database/1.%20Introduction%20Database.md)
     2. [**Field SQL**](https://github.com/benayajosuaa/Web-Dev/blob/main/Database/2.%20Field%20SQL.md)
