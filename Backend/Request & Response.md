@@ -1,0 +1,153 @@
+### unknown
+
+# 🎁 Request & Response
+
+### defenisi
+
+**Request–Response** adalah **pola komunikasi** antara *client* (misalnya browser, aplikasi mobile, Postman) dan *server* (backend) melalui protokol HTTP/HTTPS
+
+💡 **Request** = “Halo server, aku mau sesuatu”
+
+💡 **Response** = “Oke, ini jawabannya”
+
+<br/>
+
+## Element Request
+
+Setiap request punya **5 bagian utama**:
+
+| Bagian | Penjelasan | Contoh |
+| --- | --- | --- |
+| **URL (Endpoint)** | Alamat tujuan request, ibarat nomor rumah. | `/users/15`, `/products` |
+| **Method** | Jenis aksi yang mau dilakukan. | `GET`, `POST`, `PUT`, `DELETE` |
+| **Headers** | Informasi tambahan yang dikirim bersama request. | `Content-Type: application/json`, `Authorization: Bearer <token>` |
+| **Body** | Data yang mau dikirim ke server (biasanya untuk POST/PUT). | `{ "name": "Benaya" }` |
+| **Params & Query** | **Params** ada di URL (`/users/15`), **Query** setelah `?` (`?role=admin`). | Params: `15`, Query: `role=admin` |
+
+<br/>
+
+## Element Response
+
+Saat server menjawab, biasanya berisi:
+
+| Bagian | Penjelasan | Contoh |
+| --- | --- | --- |
+| **Status Code** | Angka yang menunjukkan hasil permintaan. | `200 OK`, `404 Not Found`, `401 Unauthorized` |
+| **Headers** | Info tambahan dari server. | `Content-Type: application/json` |
+| **Body** | Isi jawaban, biasanya dalam bentuk JSON. | `{ "id": 15, "name": "Benaya" }` |
+
+<br/>
+
+## Urutan Logic Request & Response
+
+berikut ini adalah urutan untuk prosesnya:
+
+1. **Client kirim request**
+    
+    Bisa dari frontend, Postman, atau bahkan curl.
+    
+    Contoh:
+    
+    ```
+    GET /users/15
+    Authorization: Bearer <token>
+    ```
+    
+2. **Server menerima request**
+    - Cek alamat (URL) → cocokkan dengan route.
+    - Lihat metode HTTP (GET, POST, dll).
+3. **Middleware berjalan**
+    - Bisa cek token JWT.
+    - Bisa validasi input.
+    - Bisa catat log.
+4. **Controller memproses**
+    - Ambil data dari service.
+    - Panggil database lewat Prisma.
+5. **Service → Database**
+    - Service adalah “jembatan” antara controller dan DB.
+    - Query data yang dibutuhkan.
+6. **Response kembali ke client**
+    - Server mengirim **status code** + **data**.
+    - Client menerima dan menampilkan.
+
+<br/>
+
+## Contoh Skenario Lengkap
+
+Misal kita punya aplikasi untuk melihat profil user
+
+<br/>
+
+**Client**:
+
+“Hey server, kasih aku data user dengan ID 15. Ini token login aku.”
+
+```
+GET /users/15
+Authorization: Bearer eyJhbGciOiJIUzI1...
+```
+
+<br/>
+
+**Server**:
+
+1. Terima request.
+2. Middleware cek token JWT:
+    - Kalau valid → lanjut.
+    - Kalau invalid → balas `401 Unauthorized`.
+3. Controller `getUser` dijalankan:
+    - Panggil `userService.getById(15)`.
+4. Service query database:
+    
+    ```sql
+    SELECT * FROM users WHERE id = 15;
+    ```
+    
+5. Kirim hasil ke controller.
+6. Controller kirim response ke client:
+    
+    ```json
+    {
+      "id": 15,
+      "name": "Benaya",
+      "email": "benaya@example.com"
+    }
+    ```
+
+<br/>
+
+## Diagram Proses
+<img width="1217" height="644" alt="image" src="https://github.com/user-attachments/assets/6644a684-1918-49a9-b715-c83997539ffa" />
+
+1. **Request dari Client ke Server**
+    
+    **Client** (misalnya browser atau aplikasi) mengirim permintaan ke **Server**
+    
+    Request ini berisi:
+    
+    - **URL** → alamat endpoint API
+    - **Method** → GET, POST, PUT, DELETE
+    - **Headers** → info tambahan seperti `Content-Type`, `Authorization` (JWT)
+    - **Body** → data yang dikirim (kalau ada)
+2. **Middleware di Server**
+    - Sebelum masuk ke **Controller**, request lewat **Middleware**
+    - Middleware bisa dipakai untuk:
+        - Mengecek JWT token (autentikasi)
+        - Memvalidasi data request
+        - Logging (mencatat aktivitas)
+    
+    Kalau lolos, request diteruskan ke Controller. Kalau gagal, langsung kirim response error ke client
+    
+3. **Controller memanggil Service**
+    - **controller** bertugas menerima request dan memutuskan logika apa yang dijalankan.
+    - Dia memanggil **Service** yang berisi logika bisnis utama (misalnya aturan cara ambil data, hitung total, dsb).
+4. **Service ambil data dari Database**
+    - Service mengirim permintaan ke **Database** lewat query (SQL atau ORM).
+    - Database mengembalikan hasil data yang diminta.
+5. **Data kembali ke Controller**
+    - Service mengembalikan data ke **Controller**
+    - Controller mengubah data itu menjadi format **response** (misalnya JSON)
+6. **Response dikirim ke Client**
+    - Server mengirim **status code** (misalnya `200 OK`) dan data ke **Client**
+    - Client menerima dan menampilkan atau memproses data tersebut
+
