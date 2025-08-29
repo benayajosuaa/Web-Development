@@ -1,1 +1,119 @@
-materi bcrypt
+### unknown
+
+# 🛡️bcrypt
+
+bcrypt adalah sebuah fungsi hash yang dirancang khusus untuk mengamankan kata sandi
+
+🪔 dianalogikan kayak gembok rahasia yang sangat canggih dan unik untuk setiap kata sandi Anda
+
+<br/>
+
+## a. kenapa memerlukan bcrypt  ?
+
+- **Melindungi Data Sensitif**
+Kata sandi adalah informasi yang sangat sensitif. Jika database Anda diretas dan kata sandi disimpan dalam teks biasa
+- **One-Way Hashing**
+bcrypt mengubah kata sandi asli menjadi string karakter acak (hash) yang tidak bisa dibaca balik
+- **"Salting" Otomatis**
+bcrypt menambahkan data acak (disebut "salt") ke setiap kata sandi sebelum di-hash untuk mencegah dua kata sandi yang sama menghasilkan hash yang sama
+- **"Cost Factor" (Rounds)**
+fleksibilitas mengatur seberapa "kuat" proses hashing dengan parameter salt (biasanya angka seperti 10-12). Semakin tinggi angka, semakin lama proses hashing, dan semakin sulit untuk diretas
+
+<br/>
+
+## **b. alur kerja bcrypt**
+
+1. **Saat Registrasi (Pendaftaran Akun):**
+    - Pengguna memberikan password ke server
+    - Server menggunakan bcrypt untuk mengubah **`password`** ini menjadi **`password_hash`**
+    - **`password_hash`** inilah yang disimpan di database, **bukan** password aslinya.
+2. **Saat Login (Masuk Akun):**
+    - Pengguna memberikan password ke server
+    - Server mengambil password_hash yang tersimpan di database untuk email/username pengguna tersebut
+    - Server menggunakan bcrypt untuk **membandingkan** password yang diberikan pengguna dengan password_hash di database. bcrypt akan melakukan hashing lagi pada password input, lalu membandingkan hasilnya.
+    - Jika cocok, berarti kata sandi benar. Jika tidak, berarti salah.
+
+<br/>
+
+## c. pembuatan bcrypt
+
+### struktur utama backend
+
+berikut ini adalah struktur utama untuk pembuatan bcrypt 
+
+```sql
+src/
+ ├── utils/
+ │    └── bcrypt.ts          # helper bcrypt
+ │          # => pada bagian ini lah bcrypt dibuat
+ ├── services/
+ │    └── user.service.ts    # logika register & login
+ ├── controllers/
+ │    └── user.controller.ts # handle request & response
+ ├── routes/
+ │    └── user.routes.ts
+ └── index.ts                # entry point express
+```
+
+berikut ini cara menambahkan bcrypt kedalam project : 
+
+1. **install dependensi** 
+    
+    ```sql
+    npm install bcrypt
+    # kalau pakai TypeScript:
+    npm install -D @types/bcrypt
+    ```
+    
+2. **tambahkan parameter salt kedalam `.env`**
+    
+    contoh : parameter saltnnya mau dibuat 10
+    
+    ```sql
+    BCRYPT_SALT_ROUNDS=10
+    ```
+    
+    **🧨 Trivia**
+    
+    > Angka 10 ini artinya proses hashing akan dilakukan berulang-ulang sebanyak 2^10 kali. Semakin tinggi, semakin aman, tapi juga makin berat prosesnya
+    > 
+3. **codingan bcrypt**
+    
+    dalam impelementasi codingan bcrypt hanya terdapat 2 konsep sederhana yang bakal digunakan yaitu **hash** dan **compare**
+    
+    ```tsx
+    import bcrypt from "bcrypt"; 
+    // a. import bcrypt 
+    
+    const SALT_ROUNDS = parseInt(process.env.BCRYPT_SALT_ROUNDS || "10", 10);
+    // b. set variabel baru untuk ngebuat "putaran" atau rounds enkripsi yang nanti akan digunakan
+    //    [1] nge-parseInt untuk mengubah string dari environment 
+    //				variable jadi number "12" → 12
+    //    [2] ngambil jumlah rounds bcrypt dan buat 10 sebagai
+    //        basis enkripsinnya
+    
+    export async function hashPassword(password: string): Promise<string> {
+      return await bcrypt.hash(password, SALT_ROUNDS);
+    }
+    // c. mengamankan password user dengan cara hashing sebelum disimpan ke database
+    //    [1] Password asli dari user (plaintext) tidak disimpan langsung ke database
+    //    [2] Sebagai gantinya, password diubah dulu jadi hash dengan hashPassword()
+    //    [3] Database hanya menyimpan hash ini
+    
+    export async function comparePassword(password: string, hash: string): Promise<boolean> {
+      return await bcrypt.compare(password, hash);
+    }
+    // d. comparePassword dipakai untuk validasi login.
+    //    [1] Saat user login, kamu tidak bisa (dan tidak boleh) nyimpen password asli
+    //        Jadi kamu simpan hash password di database
+    //    [2] Nanti login → ambil password input user, hash lagi, bandingkan dengan hash di DB.
+    //    [3] Kalau cocok → login sukses. Kalau tidak → gagal
+    //        bcrypt.compare(password, hash) akan:
+    //         - return true → jika cocok
+    //         - return false → jika tidak cocok
+    
+    ```
+    
+    **logic bcrypt**
+    
+   <img width="300" height="auto" alt="image" src="https://github.com/user-attachments/assets/74335008-4cd7-4ffc-8252-162ca311cbfe" />
