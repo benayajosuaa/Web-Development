@@ -1,4 +1,4 @@
-### unknown
+### unknown - kredibilitasnya 
 
 # 📠 psql - **PostgreSQL interactive terminal**
 
