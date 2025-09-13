@@ -6,7 +6,7 @@
 > ini adalah repository github yang akan memuat beberapa materi yang mungkin bisa saja berguna untuk mempelajari mengani dunia web development. dalam repository ini akan membahas kurang lebih beberapa tech yang biasa digunakan seperti **react**, **next.js**, **postgreSQL**
 > 
 
-### Pembagian Materi
+### Pembagian Materii
 
 dalam repository ini, akan dibagi materi-materi yang akan membahas mengenai web development, berikut ini terdapat pembagiannya : 
 
